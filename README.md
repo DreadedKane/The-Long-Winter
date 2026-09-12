@@ -51,11 +51,7 @@ This is a personal, non-commercial project at this stage. It is set in
 J.R.R. Tolkien's Middle-earth and references miniatures from Games
 Workshop's *Middle-earth Strategy Battle Game* line. It is not affiliated
 with, endorsed by, or sponsored by the Tolkien Estate, Middle-earth
-Enterprises, HarperCollins, Games Workshop, or any related rightsholder.
+Enterprises, HarperCollins, Games Workshop, or any related rights holder.
 No copyrighted third-party assets (scanned models, textures, published
 text) are included in this repository — only original design writing,
 original code, and original art assets are version-controlled here.
-
-## License
-
-See [LICENSE](LICENSE).
