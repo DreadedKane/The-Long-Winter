@@ -2,7 +2,7 @@
 ## Game Design Document — Chapter I: "Wídfell"
 
 **Status:** Living document, v0.1
-**Scope of this document:** Chapter I only. Series-wide pillars are summarized where they constrain this chapter; full series bible is a separate document.
+**Scope of this document:** Chapter I only. Series-wide pillars are summarised where they constrain this chapter; the full series bible is a separate document.
 
 ---
 
@@ -12,7 +12,7 @@ These are non-negotiable constraints every chapter is designed against. Chapter 
 
 1. **Unbroken first person.** No cutscenes. Camera never leaves Ceolwyn's eyes. Transitions between scenes are walked, not cut.
 2. **No death as a systemic concept — except where the story says otherwise.** Losing a fight is a narrative fork by default. A small number of encounters per game are true failure states, and they are always sold by the fiction, never by a meter or warning.
-3. **State, not flags.** The game tracks concrete world facts (who is alive, what was said, what was carried, what was seen) and characters reference those facts specifically. No abstracted "reputation" values.
+3. **State, not flags.** The game tracks concrete world facts (who is alive, what was said, what was carried, what was seen), and characters reference those facts specifically. No abstracted "reputation" values.
 4. **Guaranteed-reachable best ending.** The best outcome is never lost to an easy-to-miss interaction. Every thread that feeds it has at least two independent ways to secure it, and the fiction always signals when a door is closing.
 5. **Miniature-sourced art.** All painted MESBG models are scanned for texture/material fidelity; skeletal meshes are separate and shared across reskins.
 
@@ -57,19 +57,19 @@ Purpose: bond the player to Hild and the holding *through interaction*, not dial
 
 **Context:** Two Dunlending scouts, ahead of the main raid, are already at the byre when Ceolwyn and Hild come around from the house. This is the player's first fight, and it is designed to be lost more often than won on a first playthrough — that's intentional.
 
-**Mechanics used (per prior combat spec):** strike, block, shove, flee. Positioning matters — the dooryard has a well, a cart, and the byre door as usable terrain, mirroring tabletop skirmish footprint.
+**Mechanics used (per prior combat spec):** strike, block, shove, flee. Positioning matters — the dooryard has a well, a cart, and the byre door as usable terrain, mirroring a tabletop skirmish footprint.
 
 **Outcomes:**
 
 - **Win both:** Rare on a first attempt. Ceolwyn kills or drives off both scouts before the main band arrives. Byre survives. This is tracked as `dooryard_won = true`, feeding directly into the guaranteed-best-ending path (see Section 8).
-- **Lose, but survive:** The far more common and fully intended outcome. Ceolwyn is knocked down, disarmed, or driven back — the scene does not end, the camera does not cut. Hild, or a neighbor (Aldric, introduced here for the first time, fleeing his own burning croft) intervenes to break the fight, at a cost: Aldric takes a wound here if he's the one who intervenes, tracked as `aldric_wounded_ch1 = true`, which changes his physical capability in Acts II–IV.
+- **Lose, but survive:** The far more common and fully intended outcome. Ceolwyn is knocked down, disarmed, or driven back — the scene does not end; the camera does not cut. Hild, or a neighbour (Aldric, introduced here for the first time, fleeing his own burning croft) intervenes to break the fight, at a cost: Aldric takes a wound here if he's the one who intervenes, tracked as `aldric_wounded_ch1 = true`, which changes his physical capability in Acts II–IV.
 - **This encounter cannot end the game.** It's the tutorial for "you can lose and the story continues." No lethal fight happens until the player has been taught this rule once.
 
 ---
 
 ## 6. The Byre Fire — First Major Choice
 
-Immediately following the dooryard fight (won or lost), the byre is burning and Hild is not where the player left her — she went back in for the family's last milk cow, against instruction, because of an earlier optional interaction (if `hild_bond_established` includes the byre chore, she explicitly says why on the way in — otherwise she's simply gone, and the player has to *find out* why from Aldric afterward, which is a colder, harder version of the same beat).
+Immediately following the dooryard fight (won or lost), the byre is burning, and Hild is not where the player left her — she went back in for the family's last milk cow, against instruction, because of an earlier optional interaction (if `hild_bond_established` includes the byre chore, she explicitly says why on the way in — otherwise she's simply gone, and the player has to *find out* why from Aldric afterwards, which is a colder, harder version of the same beat).
 
 **This is a real choice with no correct answer**, presented entirely through the space, not a menu:
 
@@ -84,10 +84,10 @@ Immediately following the dooryard fight (won or lost), the byre is burning and 
 
 **This is the encounter that establishes death is real.**
 
-**Diegetic signaling, not a UI warning:** as the survivors flee down the Wold Track toward the tree line, the raiders' main body is now visible behind them — not an ambush, not a surprise, but a pursuit the player can see coming for a sustained stretch of the walk. Aldric (or whoever is present) says, plainly, in-fiction: *"If they catch us in the open, that's it. Get to the trees."* There is no ambiguity about the stakes because the fiction states them outright — this is the load-bearing line the whole "no death" trust is built on, and it must land as a character being honest, not a game being helpful.
+**Diegetic signalling, not a UI warning:** as the survivors flee down the Wold Track toward the tree line, the raiders' main body is now visible behind them — not an ambush, not a surprise, but a pursuit the player can see coming for a sustained stretch of the walk. Aldric (or whoever is present) says, plainly, in-fiction: *"If they catch us in the open, that's it. Get to the trees."* There is no ambiguity about the stakes because the fiction states them outright — this is the load-bearing line the whole "no death" trust is built on, and it must land as a character being honest, not a game being helpful.
 
-- If the player is caught in the open (failed to reach the tree line before the raiders close the distance — determined by how much time was spent in Sections 5–6, not a hidden clock the player can't perceive: the raiders are *visibly, physically* closing the gap the whole time), the resulting fight is winnable only under specific terrain conditions (the tree line's narrow deer path, usable exactly the way a tabletop skirmish uses a chokepoint). Losing this fight **is a game over** — the only one in Chapter I — and it is followed immediately by a distinct, authored epilogue scene from another surviving character's perspective finding the aftermath, not a "you died" screen. It functions as a canonical bad ending, not a failstate to retry blindly (though the player can, of course, load back and try again).
-- If the player reaches the tree line in time, the fight (if it happens at all) is against one or two stragglers only, using the same mechanics but firmly in "lose and the story continues" territory.
+- If the player is caught in the open (failed to reach the tree line before the raiders close the distance — determined by how much time was spent in Sections 5–6, not a hidden clock the player can't perceive: the raiders are *visibly, physically* closing the gap the whole time), the resulting fight is winnable only under specific terrain conditions (the tree line's narrow deer path, usable exactly the way a tabletop skirmish uses a chokepoint). Losing this fight **is a game over** — the only one in Chapter I — and it is followed immediately by a distinct, authored epilogue scene from another surviving character's perspective finding the aftermath, not a "you died" screen. It functions as a canonical bad ending, not a fail state to retry blindly (though the player can, of course, load back and try again).
+- If the player reaches the tree line in time, the fight (if it happens at all) is against one or two stragglers only, using the same mechanics but firmly in "lose, and the story continues" territory.
 
 This single encounter is what teaches the player, once, early, and unambiguously: *most fights are survivable losses, but the fiction will always tell you, out loud, through a person, when that stops being true.* No other encounter in the game needs to re-teach this.
 
@@ -99,7 +99,7 @@ Chapter I contributes exactly three durable facts to the eventual best ending. E
 
 | Best-ending contribution | Route A | Route B |
 |---|---|---|
-| Hild survives Chapter I in good standing with Ceolwyn | Complete the byre-chore interaction in Section 4, *and* choose to go in after her in Section 6 | Miss the chore interaction, but choose correctly in the Section 7 dialogue that follows (Aldric explains why she ran back in; player has a chance to reassure her afterward on the Track) |
+| Hild survives Chapter I in good standing with Ceolwyn | Complete the byre-chore interaction in Section 4, *and* choose to go in after her in Section 6 | Miss the chore interaction, but choose correctly in the Section 7 dialogue that follows (Aldric explains why she ran back in; player has a chance to reassure her afterwards on the Track) |
 | Aldric survives Chapter I able-bodied | Win the dooryard fight outright (Section 5) | Lose the dooryard fight, but succeed at the Section 7 Track chokepoint fight cleanly, which the narrative treats as Ceolwyn "making it up" to him |
 | Player reaches Act II with a working weapon and a workable route east | Recover the seax during the byre sequence (it's visibly on the wall where Ceolwyn's father kept it, discoverable in Section 4's free exploration) | If missed, Aldric explicitly offers his own blade on the Track in Section 7 — reframed in dialogue as a debt, not a do-over |
 
@@ -129,7 +129,7 @@ byre_losses: set  (specific named livestock/items lost, referenced by name later
 - 2x Dunlending Warrior (dooryard scouts) — existing MESBG sculpts, minimum two paint variants for reuse across the pursuing band in Section 7
 - 1x Dunlending Chieftain or unique conversion, held in reserve for Wulf's eventual reveal later in the game (do not use his likeness here — first sighting should be deferred)
 - Ceolwyn and Hild have no direct MESBG equivalents — plan for custom sculpts or heavily converted Rohan civilian proxies, scanned the same way for pipeline consistency
-- Aldric — Rohan Warrior model, unarmoured/civilian-converted for this chapter, re-scanned in armor for his Act IV appearance if he survives
+- Aldric — Rohan Warrior model, unarmoured/civilian-converted for this chapter, re-scanned in armour for his Act IV appearance if he survives
 
 ---
 
