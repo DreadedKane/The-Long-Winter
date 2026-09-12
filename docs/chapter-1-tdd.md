@@ -13,10 +13,10 @@
 
 Reasoning specific to this project's constraints:
 
-- **Nanite** handles high-poly photogrammetry-derived meshes (armor detail, cloth, weathering from painted minis) without the manual decimation pass that would otherwise eat a huge amount of solo/small-team time.
+- **Nanite** handles high-poly photogrammetry-derived meshes (armour detail, cloth, weathering from painted minis) without the manual decimation pass that would otherwise eat a huge amount of solo/small-team time.
 - **World Partition** is close to a direct answer to "no loading screens, ever" — it streams the Holding/Dooryard/Track continuous space in and out as the player walks, which is exactly the geometry Chapter I needs (Section 3 of the GDD: one continuous walkable space, three zones, no menus).
-- **Level Sequencer is explicitly not used for story beats.** This needs to be a standing rule in the engine project, not just a design intention — story beats are driven by gameplay-state triggers and live NPC behavior, not baked sequences, or the "no cutscenes" pillar erodes the first time someone's in a hurry.
-- Mature photogrammetry-to-game pipeline (RealityCapture → UE5 is a well-worn path) and strong C++/Blueprint hybrid workflow suits a small team that needs designers iterating without waiting on engineers for every dialogue change.
+- **Level Sequencer is explicitly not used for story beats.** This needs to be a standing rule in the engine project, not just a design intention — story beats are driven by gameplay-state triggers and live NPC behaviour, not baked sequences, or the "no cutscenes" pillar erodes the first time someone's in a hurry.
+- Mature photogrammetry-to-game pipeline (RealityCapture → UE5 is a well-worn path) and strong C++/Blueprint hybrid workflow suit a small team that needs designers iterating without waiting on engineers for every dialogue change.
 
 ---
 
@@ -68,7 +68,7 @@ struct FStateValue
 
 **Why not flags/booleans-only:** GDD Section 9 requires enums (`dooryard_outcome`) and sets (`byre_losses`) specifically so dialogue can reference the *specific* thing that happened, not just that "something" happened. The dialogue system (Section 4 below) is built to query these directly and fail a content-lint check (Section 8) if a writer tries to hardcode a generic line where a specific one is available.
 
-**Persistence:** World State serializes to the save file in full at every scene resolution boundary (not on a timer), so a save always corresponds to a coherent, fully-resolved story state — never a mid-fight or mid-dialogue partial state. This matters enormously for a game with a canonical death branch (Section 7 fight): a player who reaches the "caught in the open" epilogue and reloads must reload into a clean, pre-resolution state, never a corrupted mid-combat one.
+**Persistence:** World State serialises to the save file in full at every scene resolution boundary (not on a timer), so a save always corresponds to a coherent, fully-resolved story state — never a mid-fight or mid-dialogue partial state. This matters enormously for a game with a canonical death branch (Section 7 fight): a player who reaches the "caught in the open" epilogue and reloads must reload into a clean, pre-resolution state, never a corrupted mid-combat one.
 
 ---
 
@@ -78,7 +78,7 @@ struct FStateValue
 
 - Built on **ink** (inkle's narrative scripting language) embedded via a UE5 plugin, specifically because ink's native conditional syntax (`{hild_chore_helped: ... | ...}`) maps directly onto State queries with minimal custom tooling, and it's proven at scale on far larger branching projects.
 - Every ink knot that produces player-facing dialogue is required (via a build-time lint script, not a style guideline) to reference at least one World State variable if one exists for that beat — this is the actual technical enforcement of "state, not flags," not just an instruction to writers.
-- Camera and character behavior during dialogue is driven by the **same live animation/behavior system used outside dialogue** — an NPC delivering a line is still a fully simulated character in the world (can be walked around, interrupted by moving away, seen from any angle), never a canned two-shot. This is the direct technical answer to "no cutscenes reserved for movies."
+- Camera and character behaviour during dialogue is driven by the **same live animation/behavior system used outside dialogue** — an NPC delivering a line is still a fully simulated character in the world (can be walked around, interrupted by moving away, seen from any angle), never a canned two-shot. This is the direct technical answer to "no cutscenes reserved for movies."
 
 ---
 
@@ -104,7 +104,7 @@ Four verbs only (strike, block, shove, flee), per GDD — kept deliberately simp
 ## 7. Perception/AI — Raiders
 
 - Dooryard scouts (Section 5): simple two-state perception (unaware → engaged), since their narrative function is a tutorial fight, not a stealth challenge.
-- Track pursuit band (Section 7): a small pathfinding group with **persistent, player-visible position** as described in Section 5 above. Their behavior tree prioritizes closing distance on open ground and slowing at the chokepoint terrain tag, which is what creates the "make it to the tree line" tension without any smoke-and-mirrors distance faking.
+- Track pursuit band (Section 7): a small pathfinding group with **persistent, player-visible position** as described in Section 5 above. Their behaviour tree prioritises closing distance on open ground and slowing at the chokepoint terrain tag, which is what creates the "make it to the tree line" tension without any smoke-and-mirrors distance faking.
 - All raider combat animations are driven off the **shared skeleton** described in the GDD's photogrammetry section (Section 10 below) — meaning a scanned paint variant is a material/texture swap only, never a new skeletal rig, which is the actual technical mechanism behind "cheap visual variety across a warband."
 
 ---
@@ -119,12 +119,12 @@ Four verbs only (strike, block, shove, flee), per GDD — kept deliberately simp
 
 ## 9. Photogrammetry Technical Pipeline
 
-1. **Capture:** turntable rig, fixed lighting (polarized to reduce specular highlights on painted miniature varnish), ~150–200 photos per model at 28mm scale.
+1. **Capture:** turntable rig, fixed lighting (polarised to reduce specular highlights on painted miniature varnish), ~150–200 photos per model at 28mm scale.
 2. **Reconstruction:** RealityCapture, exported as high-poly mesh + 4K–8K texture bake.
 3. **Retopology:** manual/ZRemesher pass to a game-ready poly count with clean UVs — the scanned high-poly is retained only as a **bake source** for normal/albedo/roughness maps, never shipped as the render mesh directly, per the reproportioning note from the earlier discussion (miniature sculpting conventions read as "toy" at 1:1 in dynamic lighting).
-4. **Reproportion pass:** the retopologized mesh is conformed to a standardized humanoid proportion template before texture bake, correcting the chunky-weapon/exaggerated-detail issue.
+4. **Reproportion pass:** the retopologized mesh is conformed to a standardised humanoid proportion template before texture bake, correcting the chunky-weapon/exaggerated-detail issue.
 5. **Rigging:** conformed to the project's shared humanoid skeleton (one for player-scale humans, no separate rig per raider) so animations and the combat system's hitbox authoring (Section 6) work identically across every reskinned enemy.
-6. **Material library:** each painted scheme becomes a reusable material instance, letting a single Dunlending Warrior sculpt supply several visually distinct raiders in the Section 7 band at zero additional modeling cost.
+6. **Material library:** each painted scheme becomes a reusable material instance, letting a single Dunlending Warrior sculpt supply several visually distinct raiders in the Section 7 band at zero additional modelling cost.
 
 **Chapter I specific asset list** (from the GDD, restated here as production tickets):
 - Dunlending Warrior — 2 paint variants minimum (dooryard scouts, Section 5)
